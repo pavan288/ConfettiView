@@ -13,8 +13,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let confettiView = ConfettiView(frame: self.view.frame)
+        self.view.addSubview(confettiView)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            confettiView.stopEmitting()
+        }
     }
-
-
 }
 
