@@ -30,18 +30,20 @@ class ConfettiView: UIView {
         particleEmitter.emitterShape = .line
         particleEmitter.emitterSize = CGSize(width: self.frame.size.width, height: 1)
 
-        let red = makeEmitterCell(color: UIColor.red)
-        let green = makeEmitterCell(color: UIColor.green)
-        let blue = makeEmitterCell(color: UIColor.blue)
-
-        particleEmitter.emitterCells = [red, green, blue]
+        let redTriangle = makeEmitterCell(of: UIImage(named: "confetti_triangle_filled_small"), and: UIColor.red)
+        let greenTriangle = makeEmitterCell(of: UIImage(named: "confetti_triangle_filled_small"), and: UIColor.green)
+        let blueTriangle = makeEmitterCell(of: UIImage(named: "confetti_triangle_filled_small"), and: UIColor.blue)
+        let redRectangle = makeEmitterCell(of: UIImage(named: "confetti_rectangle_filled_small"), and: UIColor.red)
+        let greenRectangle = makeEmitterCell(of: UIImage(named: "confetti_rectangle_filled_small"), and: UIColor.green)
+        let blueRectangle = makeEmitterCell(of: UIImage(named: "confetti_rectangle_filled_small"), and: UIColor.blue)
+        particleEmitter.emitterCells = [redTriangle, greenTriangle, blueTriangle, redRectangle, greenRectangle, blueRectangle]
 
         self.layer.addSublayer(particleEmitter)
     }
 
-    private func makeEmitterCell(color: UIColor) -> CAEmitterCell {
+    private func makeEmitterCell(of image: UIImage?, and color: UIColor) -> CAEmitterCell {
         let cell = CAEmitterCell()
-        cell.birthRate = 3.5
+        cell.birthRate = 3
         cell.lifetime = 7.0
         cell.lifetimeRange = 0
         cell.color = color.cgColor
@@ -54,7 +56,7 @@ class ConfettiView: UIView {
         cell.scaleRange = 1.0
         cell.scaleSpeed = -0.05
 
-        cell.contents = UIImage(named: "confetti_triangle_filled_small")?.cgImage
+        cell.contents = image?.cgImage
         return cell
     }
 
